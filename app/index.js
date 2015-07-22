@@ -1,23 +1,13 @@
-// require('./app.tag');
-var riot = require('riot');
-var ng = require('angular');
+// require("expose?control!./riot.control");
+require('./app.css');
+var control = require('./riot.control');
+var todoStore = require('./todo.store');
 
-var riotMod = ng.module('ngo-riot', []).factory('riot', function () { return riot });
+control.addStore(todoStore);
 
-var appMod = ng.module('myapp', ['ngo-riot', require('angular-ui-router')]);
+require('./todo');
+require('./messenger');
+require('./widget');
+require('./todoapp');
 
-appMod.controller('Boot', function ($scope, riot) {
-  require('./app');
-  riot.mount('app');
-});
-
-appMod.controller('Cool', function ($scope, riot) {
-  console.log("ran");
-  require('./cool');
-  riot.mount('cool');
-});
-
-
-
-require('./router')(appMod);
-
+riot.mount('todoapp');

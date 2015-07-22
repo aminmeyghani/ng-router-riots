@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
+
 module.exports = {
   entry: './app/index',
   output: {
@@ -18,16 +19,18 @@ module.exports = {
   //   modulesDirectories: ['web_modules', 'node_modules']
   // },
   resolve: {
-    extensions: ["", ".webpack.js", ".web.js", ".js", ".tag"]
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".tag", ".htm", ".coffee"]
   },
   module: {
 
     preLoaders: [
-      { test: /\.tag$/, exclude: /node_modules/, loader: 'riotjs-loader', query: { type: 'none' } }
+      { test: /\.tag/, exclude: /node_modules/, loader: 'riotjs-loader', query: { type: 'none'} }
     ],
     loaders: [
       { test: /\.js|\.tag$/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /\.html$/, exclude: /node_modules/, loader: 'raw-loader' }
+      { test: /\.coffee$/, exclude: /node_modules/, loader: 'coffee-loader' },
+      { test: /\.html$/, exclude: /node_modules/, loader: 'raw-loader' },
+      { test: /\.css/, exclude: /node_modules/, loader: 'style-loader!css-loader' }
     ]
   },
   // node: {
